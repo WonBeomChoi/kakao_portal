@@ -13,7 +13,8 @@ public class UserDaoTests {
         Long id = 1l;
         String name = "허윤호";
         String password = "1234";
-        UserDao userDao = new UserDao();
+        DaoFactory daoFactory = new DaoFactory();
+        UserDao userDao = daoFactory.getUserDao();
         User user = userDao.get(id);
         assertThat(user.getId(), is(id));
         assertThat(user.getName(), is(name));
@@ -26,11 +27,24 @@ public class UserDaoTests {
         user.setName(name);
         String password = "!111";
         user.setPassword(password);
-        UserDao userDao = new UserDao();
+        DaoFactory daoFactory = new DaoFactory();
+        UserDao userDao = daoFactory.getUserDao();
         Long id = userDao.add(user);
         User resultUser = userDao.get(id);
         assertThat(resultUser.getId(), is(id));
         assertThat(resultUser.getName(), is(name));
         assertThat(resultUser.getPassword(), is(password));
     }
+//    @Test
+//    public void testHallaGet() throws SQLException, ClassNotFoundException {
+//        Long id = 1l;
+//        String name = "헐크";
+//        String password = "1111";
+//        DaoFactory daoFactory = new DaoFactory();
+//        UserDao userDao = daoFactory.getUserDao();
+//        User user = userDao.get(id);
+//        assertThat(user.getId(), is(id));
+//        assertThat(user.getName(), is(name));
+//        assertThat(user.getPassword(), is(password));
+//    }
 }
